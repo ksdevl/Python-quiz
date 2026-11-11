@@ -23,13 +23,9 @@ Python 기초 문법과 객체지향 프로그래밍을 활용한 콘솔 기반 
 
 ### 1-1. 프로젝트 소개
 
-Python Quiz는 Python 기초 문법과 객체지향 프로그래밍을 학습하기 위해 제작한 콘솔 기반 퀴즈 프로그램입니다.
+Python Quiz는 Python 기초 문법과 객체지향 프로그래밍을 학습하기 위해 제작한 콘솔 기반 퀴즈 프로그램으로 사용자는 프로그램의 메뉴를 통해 퀴즈 출제, 퀴즈 등록, 퀴즈 목록 조회, 최고 점수 확인 등의 기능을 이용할 수 있다.
 
-사용자는 프로그램의 메뉴를 통해 퀴즈 출제, 퀴즈 등록, 퀴즈 목록 조회, 최고 점수 확인 등의 기능을 이용할 수 있습니다.
-
-기본 기능 외에도 랜덤 출제, 출제 문제 수 선택, 힌트 사용 및 점수 차감, 퀴즈 삭제, 점수 기록 히스토리 기능을 추가하여 프로그램의 활용성을 확장했습니다.
-
-퀴즈 데이터와 게임 기록은 JSON 파일에 저장하여 프로그램을 종료하고 다시 실행해도 데이터가 유지되도록 구현했습니다.
+기본 기능 외에도 랜덤 출제, 출제 문제 수 선택, 힌트 사용 및 점수 차감, 퀴즈 삭제, 점수 기록 히스토리 기능을 추가하여 프로그램의 활용성을 확장하였으며, 퀴즈 데이터와 게임 기록은 JSON 파일에 저장하여 프로그램을 종료하고 다시 실행해도 데이터가 유지되도록 구현하였다.
 
 ### 1-2. 프로젝트 목표
 
@@ -87,14 +83,14 @@ Python Quiz는 Python 기초 문법과 객체지향 프로그래밍을 학습하
 ### 3-1. 환경 확인 명령어
 
 ```powershell
-python --version
+py --version
 git --version
 ```
 
 실제 설치된 버전:
 
-- Python: [실제 버전 작성]
-- Git: [실제 버전 작성]
+- Python: [Python 3.14.10]
+- Git: [git version 2.56.0.windows.4]
 
 ## 4. 프로젝트 구조
 
@@ -104,13 +100,9 @@ python-quiz-game/
 ├── main.py
 ├── quiz.py
 ├── quiz_game.py
-├── score_record.py
-├── storage.py
-│
 ├── state.json
 ├── README.md
 ├── .gitignore
-│
 └── docs/
     └── screenshots/
         ├── environment.png
@@ -135,8 +127,6 @@ python-quiz-game/
 | main.py | 프로그램 실행 시작점 |
 | quiz.py | Quiz 클래스 및 개별 퀴즈 데이터 관리 |
 | quiz_game.py | 게임 진행 및 전체 메뉴 기능 관리 |
-| score_record.py | 게임 결과 및 점수 기록 관리 |
-| storage.py | JSON 파일 저장 및 불러오기 |
 | state.json | 퀴즈, 최고 점수, 게임 기록 저장 |
 | README.md | 프로젝트 설명 및 사용 방법 |
 | .gitignore | Git 추적 제외 파일 설정 |
@@ -151,9 +141,10 @@ python-quiz-game/
 | 퀴즈 풀기 | 등록된 퀴즈 풀기 및 정답 확인 |
 | 퀴즈 추가 | 문제, 선택지 4개, 정답 및 힌트 등록 |
 | 퀴즈 목록 | 등록된 퀴즈 전체 조회 |
-| 최고 점수 | 최고 점수 조회 및 갱신 |
-| 데이터 저장 | 퀴즈 및 점수를 JSON에 저장 |
-| 데이터 불러오기 | 프로그램 재실행 시 기존 데이터 복원 |
+| 최고 점수 확인 | 최고 점수 조회 및 갱신 |
+| 퀴즈 삭제 | 등록된 퀴즈 삭제 |
+| 점수 기록 확인 | JSON에 기록된 점수 확인 |
+| 프로그램 종료 | 프로그램 정상 종료 |
 
 ### 5-2. 보너스 기능
 
@@ -163,17 +154,20 @@ python-quiz-game/
 | 문제 수 선택 | 사용자가 원하는 문제 수 선택 |
 | 힌트 기능 | 문제별 힌트 확인 및 점수 차감 |
 | 퀴즈 삭제 | 등록된 문제 삭제 및 저장 |
-| 점수 기록 히스토리 | 게임별 날짜, 문제 수, 정답 수, 점수 기록 |
+| 점수 기록 히스토리 | 게임별 날짜/시간, 문제 수, 정답 수, 점수 기록 |
 
 ### 5-3. 퀴즈 진행 방식
 
-1. 메뉴에서 Quiz Start을 선택
-2. 전체 출제 또는 문제 수를 선택
-3. 랜덤 출제 여부 설정
-4. 문제와 선택지 확인
-5. 정답을 입력하거나 힌트를 사용
+1. 메뉴에서 '1.퀴즈 풀기'를 선택
+2. 출제 방식 선택
+  - 전체 문제 순서대로 풀기
+  - 전체 문제 랜덤으로 풀기
+  - 문제 수 선택해서 풀기
+  - 랜덤으로 문제 수 선택해서 풀기
+3. 문제와 선택지 확인
+5. 정답을 입력하거나 힌트를 사용(답을 모를 경우 Enter)
 6. 정답 여부와 획득 점수를 확인
-7. 모든 문제가 끝나면 최종 점수 출력
+7. 모든 문제가 종료 후 최종 점수 출력
 8. 최고 점수와 게임 기록을 저장
 
 ### 5-4. 점수 계산 방식
@@ -184,22 +178,25 @@ python-quiz-game/
 |---|---:|
 | 힌트 없이 정답 | 5점 |
 | 힌트 사용 후 정답 | 3점 |
-| 오답 | -2점 |
-| 미선택 | 0점 |
+| 힌트 사용 후 오답 | -4점 |
+| 힌트 미사용 후 오답 | -2점 |
+| 힌트 미사용 후 미선택 | 0점 |
+| 힌트 사용 후 미선택 | -2점 |
 
 최종 점수는 다음 공식으로 계산
 
-최종 점수 = 획득 점수 합계(정답 개수 X 5) - 차감 점수 합계(힌트 사용 개수 X 2 + 오답 개수 X 2)
+최종 점수 = (획득 점수 합계(정답 개수 X 5) - 차감 점수 합계(힌트 사용 개수 X 2 + 오답 개수 X 2))/획득 점수 합계(정답 개수 X 5) X 100 
 
 예시:
 
-20문제 중 16문제를 맞히고 1회 힌트를 사용한 경우:
+18문제 중 16문제를 맞히고 1회 힌트를 사용한 경우:
 
 - 정답 15개: 75점
 - 힌트 사용 후 정답 1개: 3점
 - 오답 0개: 0점
-- 미선택 1개: 0점
-- 최종 점수: 78점
+- 미선택 4개: 0점
+- 누적점수: 78점
+- 최종점수: 87점
 
 ### 5-5. 예외 및 입력 처리
 
@@ -209,7 +206,7 @@ python-quiz-game/
 - 숫자가 아닌 문자 입력
 - 허용 범위를 벗어난 숫자 입력
 - Ctrl+C 입력
-- EOFError 발생
+- KeyboardInterrupt, EOFError 발생
 - 퀴즈가 없는 경우
 - JSON 파일이 없는 경우
 - JSON 파일이 손상된 경우
@@ -228,7 +225,7 @@ python-quiz-game/
 | answer | 정답 번호 |
 | hint | 퀴즈 힌트 |
 | show_question() | 문제 및 선택지 출력 |
-| check_answer() | 정답 확인 |
+| evaluate_answer() | 정답 확인 |
 | to_dict() | 딕셔너리 형태로 변환 |
 | from_dict() | 딕셔너리에서 객체 생성 |
 
@@ -241,18 +238,18 @@ python-quiz-game/
 | show_menu() | 메인 메뉴 출력 |
 | run() | 프로그램 실행 |
 | play_quiz() | 퀴즈 진행 |
-| select_question_count() | 출제 문제 수 선택 |
+| select_play_mode() | 출제 문제 수 선택 |
 | add_quiz() | 퀴즈 등록 |
 | delete_quiz() | 퀴즈 삭제 |
 | show_quizzes() | 퀴즈 목록 조회 |
-| show_score() | 최고 점수 조회 |
+| show_best_score() | 최고 점수 조회 |
 | show_history() | 게임 기록 조회 |
 | get_valid_number() | 숫자 입력 검증 |
 | get_valid_text() | 문자열 입력 검증 |
 
-### 6-3. Score Record 클래스
+### 6-3. 게임 기록 관리
 
-게임 결과를 기록하는 클래스입니다.
+게임 결과는 별도의 ScoreRecord 클래스 대신 딕셔너리 형태로 생성하여 QuizGame 클래스의 history 리스트에 저장
 
 | 속성 | 역할 |
 |---|---|
@@ -263,15 +260,15 @@ python-quiz-game/
 | score | 최종 점수 |
 | hint_count | 힌트 사용 횟수 |
 
-### 6-4. Storage 기능
+### 6-4. JSON Storage 기능
 
-JSON 파일을 관리
+별도의 Storage 클래스를 생성하지 않고 QuizGame 클래스 내부의 메서드를 통해 JSON 파일 관리
 
-- 퀴즈 데이터 저장
-- 퀴즈 데이터 불러오기
-- 최고 점수 저장
-- 게임 기록 저장
-- 파일 손상 및 읽기/쓰기 오류 처리
+- load_state(): JSON 데이터 불러오기
+- save_state(): JSON 데이터 저장하기
+- 퀴즈 데이터 저장 및 복원
+- 최고 점수 저장 및 복원
+- 게임 기록 저장 및 복원
 
 ## 7. 데이터 저장 및 관리
 
@@ -310,7 +307,6 @@ JSON 파일을 관리
             "played_at": "2026-11-10 15:00:00",
             "total_questions": 20,
             "correct_answers": 14,
-            "incorrect_answers": 0,
             "score": 68,
             "hint_count": 1
         }
@@ -332,7 +328,6 @@ JSON 파일을 관리
 | played_at | str | 게임 날짜 및 시간 |
 | total_questions | int | 출제 문제 수 |
 | correct_answers | int | 정답 개수 |
-| incorrect_answers | int | 오답 개수 |
 | score | int | 획득 점수 |
 | hint_count | int | 힌트 사용 횟수 |
 
@@ -341,7 +336,7 @@ JSON 파일을 관리
 1. 프로그램 실행 시 state.json 확인
 2. 파일이 존재하면 기존 데이터 로드
 3. 파일이 없으면 기본 퀴즈 데이터 사용
-4. 퀴즈 등록 및 삭제 시 데이터 저장
+4. 퀴즈 추가 및 삭제 시 데이터 저장
 5. 게임이 종료되면 최고 점수와 게임 기록을 저장
 6. 프로그램 재실행 시 이전 데이터 복원
 7. JSON이 손상된 경우 안내 메시지를 출력하고 기본 데이터로 복구
@@ -363,23 +358,21 @@ cd python-quiz
 ### 8-3. Python 버전 확인
 
 ```powershell
-python --version
+py --version
 ```
 
-Python 3.10 이상인지 확인
+Python 3.14.10
 
 ### 8-4. 프로그램 실행
 
 ```powershell
-python main.py
+py main.py
 ```
 
 ### 8-5. 프로그램 메뉴 예시
 
 ```text
-========================================
-          PYTHON QUIZ
-========================================
+========== Python Quiz Game ==========
 1. 퀴즈 풀기
 2. 퀴즈 추가
 3. 퀴즈 목록
@@ -387,73 +380,83 @@ python main.py
 5. 퀴즈 삭제
 6. 점수 기록 확인
 7. 프로그램 종료
-========================================
-메뉴 선택
+======================================
+메뉴를 선택하세요:
 ```
 
 ## 9. 테스트 및 검증
-
-아래 항목은 실제 프로그램을 실행하여 검증
 
 ### 9-1. 기본 기능 테스트
 
 | 번호 | 테스트 항목 | 기대 결과 | 검증 결과 |
 |---|---|---|---|
-| 1 | 프로그램 실행 | 메뉴 출력 | [작성 필요] |
-| 2 | 퀴즈 풀기 | 정답 및 오답 확인 | [작성 필요] |
-| 3 | 퀴즈 추가 | 문제 등록 | [작성 필요] |
-| 4 | 퀴즈 목록 | 등록 문제 출력 | [작성 필요] |
-| 5 | 최고 점수 | 최고 점수 확인 | [작성 필요] |
-| 6 | 프로그램 종료 | 정상 종료 | [작성 필요] |
+| 1 | 프로그램 실행 | 메뉴 출력 | ![실행 메뉴](./docs/screenshots/실행%20메뉴.PNG) |
+| 2 | 퀴즈 풀기 | 정답 및 오답 확인 | ![퀴즈 풀기](./docs/screenshots/퀴즈%20풀기.PNG) |
+| 3 | 퀴즈 추가 | 퀴즈 등록 | ![퀴즈 추가](./docs/screenshots/퀴즈%20추가.PNG) |
+| 4 | 퀴즈 목록 | 등록 문제 출력 | ![퀴즈 목록](./docs/screenshots/퀴즈%20목록.PNG) |
+| 5 | 최고 점수 | 최고 점수 확인 | ![최고 점수](./docs/screenshots/최고%20점수.PNG) |
+| 6 | 프로그램 종료 | 정상 종료 | ![프로그램 종료](./docs/screenshots/프로그램%20종료.PNG) |
 
 ### 9-2. 보너스 기능 테스트
 
 | 번호 | 테스트 항목 | 기대 결과 | 검증 결과 |
 |---|---|---|---|
-| 1 | 랜덤 출제 | 문제 순서 무작위 변경 | [작성 필요] |
-| 2 | 문제 수 선택 | 지정한 문제 수만 출제 | [작성 필요] |
-| 3 | 힌트 사용 | 힌트 출력 및 감점 | [작성 필요] |
-| 4 | 퀴즈 삭제 | 선택 문제 삭제 | [작성 필요] |
-| 5 | 점수 기록 | 게임 기록 누적 | [작성 필요] |
+| 1 | 랜덤 출제 | 문제 순서 무작위 변경 | ![랜덤 출제](./docs/screenshots/랜덤%20출제.PNG) |
+| 2 | 문제 수 선택 | 지정한 문제 수만 출제 | ![문제 수 선택](./docs/screenshots/문제%20수%20선택.PNG) |
+| 3 | 힌트 사용 | 힌트 출력 및 점수 감점 | ![힌트 사용](./docs/screenshots/힌트%20사용.PNG) |
+| 4 | 퀴즈 삭제 | 선택 문제 삭제 | ![퀴즈 삭제](./docs/screenshots/퀴즈%20삭제.PNG) |
+| 5 | 점수 기록 | 게임 플레이 기록 | ![게임 기록](./docs/screenshots/게임%20점수%20기록.PNG) |
 
 ### 9-3. 예외 처리 테스트
 
 | 번호 | 테스트 항목 | 기대 결과 | 검증 결과 |
 |---|---|---|---|
-| 1 | 문자 입력 | 안내 후 재입력 | [작성 필요] |
-| 2 | 범위 초과 | 안내 후 재입력 | [작성 필요] |
-| 3 | 빈 입력 | 안내 후 재입력 | [작성 필요] |
-| 4 | 공백 포함 숫자 | 공백 제거 후 처리 | [작성 필요] |
-| 5 | Ctrl+C | 안전 종료 | [작성 필요] |
-| 6 | EOFError | 안전 종료 | [작성 필요] |
-| 7 | JSON 파일 없음 | 기본 데이터 사용 | [작성 필요] |
-| 8 | JSON 손상 | 기본 데이터 복구 | [작성 필요] |
-| 9 | 퀴즈 0개 | 안내 메시지 출력 | [작성 필요] |
-| 10 | 첫 게임 점수 확인 | 기록 없음 안내 | [작성 필요] |
+| 1 | 문자 입력 | 숫자 입력 검증 메서드 존재 | 미입력 조치 확인|
+| 2 | 범위 초과 | 범위 검증 구조 존재 | 숫자 범위 초과시 재입력 확인 |
+| 3 | 빈 입력 | 퀴즈 답변에서 Enter는 무응답 처리 | 설명 수정 |
+| 4 | 공백 포함 숫자 | 	앞뒤 공백 제거 처리 | 내부 공백 테스트 |
+| 5 | Ctrl+C | 안전 종료 | 안전 종료 메시지 확인 |
+| 6 | EOFError | 안전 종료 | 안전 종료 메시지 확인 |
+| 7 | JSON 파일 없음 | 기본 데이터 사용 | JSON 히스토리 삭제 시 내부 데이터로 복구 |
+| 8 | JSON 손상 | 기본 데이터 복구 | JSON 히스토리 삭제 시 내부 데이터로 복구 |
+| 9 | 퀴즈 0개 | 안내 메시지 출력 | 재선택 안내 |
+| 10 | 첫 게임 점수 확인 | 기록 안내 | 점수 기록 확인 |
 
 ### 9-4. 데이터 유지 테스트
 
 | 번호 | 테스트 | 기대 결과 | 검증 결과 |
 |---|---|---|---|
-| 1 | 퀴즈 추가 후 재실행 | 추가 문제 유지 | [작성 필요] |
-| 2 | 퀴즈 삭제 후 재실행 | 삭제 상태 유지 | [작성 필요] |
-| 3 | 최고 점수 갱신 후 재실행 | 최고 점수 유지 | [작성 필요] |
-| 4 | 게임 기록 저장 후 재실행 | 기록 유지 | [작성 필요] |
+| 1 | 퀴즈 추가 후 재실행 | 추가 문제 유지 | ![퀴즈 추가](./docs/screenshots/퀴즈%20추가2.PNG) |
+| 1 | 퀴즈 추가 후 재실행 | 추가 문제 유지 | ![퀴즈 추가 유지](./docs/screenshots/퀴즈%20추가%20유지.PNG) |
+| 2 | 퀴즈 삭제 후 재실행 | 삭제 상태 유지 | ![퀴즈 삭제](./docs/screenshots/퀴즈%20삭제2.PNG) |
+| 2 | 퀴즈 삭제 후 재실행 | 삭제 상태 유지 | ![퀴즈 삭제](./docs/screenshots/퀴즈%20삭제%20유지.PNG) |
+| 3 | 최고 점수 갱신 후 재실행 | 최고 점수 유지 | ![최고 점수](./docs/screenshots/최고%20점수.PNG) |
+| 4 | 게임 기록 저장 후 재실행 | 기록 유지 | ![게임 기록](./docs/screenshots/게임%20점수%20기록2.PNG) |
 
 ### 9-5. 테스트 명령어
 
+프로그램 실행
 ```powershell
-python main.py
+py main.py
 ```
-
+<br><br>
+문법 검사 
+```
+py -m py_compile main.py quiz.py quiz_game.py
+```
+이상이 없을 경우 아무 메시지도 안뜸
+<br><br>
+Json 히스토리 확인
 ```powershell
 Get-Content .\state.json -Encoding UTF8
 ```
-
+<br>
+Git 저장소 상태 확인
 ```powershell
 git status
 ```
-
+<br>
+Git에 저장된 커밋 기록 확인
 ```powershell
 git log --oneline --graph --all
 ```
@@ -464,55 +467,87 @@ git log --oneline --graph --all
 
 ### 10-1. 개발 환경
 
-![개발 환경](docs/screenshots/environment.png)
+![개발 환경](./docs/screenshots/개발환경.PNG)
 
 ### 10-2. 메인 메뉴
 
-![메인 메뉴](docs/screenshots/menu.png)
+![메인 메뉴](./docs/screenshots/실행%20메뉴.PNG)
 
 ### 10-3. 퀴즈 풀기
 
-![퀴즈 풀기](docs/screenshots/play.png)
+![퀴즈 풀기](./docs/screenshots/퀴즈%20풀기2.PNG)
 
 ### 10-4. 랜덤 출제
 
-![랜덤 출제](docs/screenshots/random_quiz.png)
+![랜덤 출제](./docs/screenshots/퀴즈%20풀기%20메뉴.PNG)
 
 ### 10-5. 문제 수 선택
 
-![문제 수 선택](docs/screenshots/question_count.png)
+![문제 수 선택](./docs/screenshots/문제%20수%20선택.PNG)
 
 ### 10-6. 힌트 기능
 
-![힌트 기능](docs/screenshots/hint.png)
+![힌트 기능](./docs/screenshots/힌트%20사용.PNG)
 
 ### 10-7. 퀴즈 추가
 
-![퀴즈 추가](docs/screenshots/add_quiz.png)
+![퀴즈 추가](./docs/screenshots/퀴즈%20추가.PNG)
 
 ### 10-8. 퀴즈 삭제
 
-![퀴즈 삭제](docs/screenshots/delete_quiz.png)
+![퀴즈 삭제](./docs/screenshots/퀴즈%20삭제.PNG)
 
 ### 10-9. 퀴즈 목록
 
-![퀴즈 목록](docs/screenshots/quiz_list.png)
+![퀴즈 목록](./docs/screenshots/퀴즈%20목록.PNG)
 
 ### 10-10. 최고 점수
 
-![최고 점수](docs/screenshots/score.png)
+![최고 점수](./docs/screenshots/최고%20점수.PNG)
 
 ### 10-11. 점수 기록 히스토리
 
-![점수 기록](docs/screenshots/history.png)
+![점수 기록](./docs/screenshots/게임%20점수%20기록.PNG)
 
 ### 10-12. 데이터 재실행 확인
 
-![데이터 유지](docs/screenshots/restart.png)
+JSON 기록 내역 확인
+```
+[PSCustomObject]@{
+    퀴즈수 = $before.quizzes.Count
+    최고점수 = $before.best_score
+    게임기록수 = $before.history.Count
+}
+```
+![데이터 유지](./docs/screenshots/데이터%20재실행.PNG)
+<br>
+최신 JSON 열기
+```
+$after = Get-Content .\state.json -Raw -Encoding UTF8 | ConvertFrom-Json
+```
+<br>
+최신 JSON 기록 확인
+```
+[PSCustomObject]@{
+    퀴즈수 = $after.quizzes.Count
+    최고점수 = $after.best_score
+    게임기록수 = $after.history.Count
+}
+```
+
+![데이터 유지](./docs/screenshots/데이터%20재실행2.PNG)
 
 ### 10-13. Git 커밋 및 병합 기록
 
-![Git 기록](docs/screenshots/git_history.png)
+Git의 현재 상태/브랜치/커밋 순서와 브랜치 병합 사항 확인
+```
+git status
+git branch -a
+git log --oneline --graph --all
+```
+
+![Git 병합 기록](./docs/screenshots/Git%20커밋%20및%20병합%20기록.PNG)
+
 
 ## 11. Git 및 GitHub 관리
 
@@ -533,7 +568,7 @@ git log --oneline --graph --all
 | 브랜치 | 용도 |
 |---|---|
 | main | 최종 안정화 코드 |
-| feature/quiz-play | 퀴즈 출제 기능 개발 |
+| feature/quiz-play | 퀴즈 출제 기능 개발(선택) |
 | feature/bonus | 보너스 기능 개발 (선택) |
 
 기능별로 브랜치를 생성하고 개발이 완료되면 main 브랜치에 병합
@@ -548,6 +583,30 @@ git log --oneline --graph --all
 - Refactor: 코드 구조 개선
 - Test: 테스트 및 검증
 - Docs: 문서 작성 및 수정
+
+
+기존 작성 커밋 내용 확인
+
+![커밋 내역](./docs/screenshots/Git%20커밋%20및%20병합%20기록.PNG)
+
+Git 현재 상태 확인
+```
+git status
+git branch --list
+```
+working tree clean인지 확인하고, 백업 브랜치인 backup-before-message-rewrite가 있는지 확인
+없는 경우 생성
+```
+git branch backup-before-message-rewrite
+```
+
+최초 커밋부터 수정 시작
+```
+git rebase -i --root --rebase-merges
+```
+
+
+
 
 최종 커밋 개수: [실제 확인 후 작성]
 
