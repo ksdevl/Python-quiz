@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Python Quiz
 Python 기초 문법과 객체지향 프로그래밍을 활용한 콘솔 기반 퀴즈 게임
 
@@ -668,6 +667,3 @@ git log --oneline --graph --all
 
 https://github.com/ksdevl/Python-quiz
 
-=======
-# Python-quiz
->>>>>>> b3490666fadc657da03ae16d5ccc513340154cc6
