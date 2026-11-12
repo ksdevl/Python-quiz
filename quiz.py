@@ -4,6 +4,7 @@ class Quiz:
         self.question = question
         self.choices = choices
         self.answer = answer
+        self.hint = hint
 
     def show_question(self):
         print(self.question)
@@ -61,6 +62,6 @@ class Quiz:
         return cls(
             data["question"],
             data["choices"],
-            data["answer"]
+            data["answer"],
             data.get("hint", "")
         )
