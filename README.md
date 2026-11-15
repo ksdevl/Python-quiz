@@ -423,7 +423,6 @@ py main.py
 | 9 | 퀴즈 0개 | 안내 메시지 출력 | 재선택 안내 |
 | 10 | 첫 게임 점수 확인 | 기록 안내 | 점수 기록 확인 |
 
-
 ### 9-4. 데이터 유지 테스트
 
 | 번호 | 테스트 | 기대 결과 | 검증 결과 |
@@ -441,7 +440,7 @@ py main.py
 ```powershell
 py main.py
 ```
-
+<br><br>
 문법 검사 
 ```
 py -m py_compile main.py quiz.py quiz_game.py
