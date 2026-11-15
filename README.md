@@ -526,8 +526,9 @@ JSON 기록 내역 확인
 ```
 $after = Get-Content .\state.json -Raw -Encoding UTF8 | ConvertFrom-Json
 ```
-<br>
+
 최신 JSON 기록 확인
+
 ```
 [PSCustomObject]@{
     퀴즈수 = $after.quizzes.Count
@@ -618,9 +619,47 @@ git rev-list --count HEAD
 
 ### 11-4. clone 및 pull 실습
 
-별도의 디렉터리에 GitHub 저장소를 clone하고 README를 수정한 다음 commit 및 push 수행
+- 별도의 디렉터리에 GitHub 저장소를 clone하고 README를 수정한 다음 commit 및 push 수행
 
-이후 기존 로컬 작업 폴더에서 pull을 실행하여 변경사항이 반영되는지 확인
+상위 디렉토리 이동
+```
+cd "C:\Users\K'"
+```
+
+Github 저장소 복제
+```
+git clone https://github.com/ksdevl/Python-quiz.git Python-quiz-clone
+```
+
+복제 폴더로 이동
+```
+cd .\Python-quiz-clone
+```
+
+복제 상태 확인
+```
+git status
+git remote -v
+```
+실행 결과:
+```
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+origin  https://github.com/ksdevl/Python-quiz.git (fetch)
+origin  https://github.com/ksdevl/Python-quiz.git (push)
+```
+
+클론 폴더의 Readme 수정 사항 add 및 커밋 추가
+```
+git diff README.md
+git add README.md
+git status
+git commit -m "Docs: clone 및 pull 실습 기록 추가"
+```
+확인 결과: 커밋 01df2e7이 생성되었으며, GitHub main 브랜치에 정상적으로 업로드
+
 
 실습 결과: [실제 수행 결과 작성]
 
