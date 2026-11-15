@@ -606,10 +606,15 @@ git branch backup-before-message-rewrite
 git rebase -i --root --rebase-merges
 ```
 
+![커밋 내역](./docs/screenshots/Git%20커밋%20및%20병합%20기록2.PNG)
 
 
+최종 커밋 개수
+```
+git rev-list --count HEAD
+```
 
-최종 커밋 개수: [실제 확인 후 작성]
+![커밋 개수](./docs/screenshots/Git%20커밋%20개수.PNG)
 
 ### 11-4. clone 및 pull 실습
 
