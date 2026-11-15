@@ -36,7 +36,7 @@ class Quiz:
             score = 5
 
         elif result == "incorrect":
-            score = 0
+            score -= 2
 
         elif result == "unanswered":
             score = 0
@@ -44,8 +44,6 @@ class Quiz:
         if hint_used:
             score -= 2
 
-        if result == "incorrect":
-            score -= 2
 
         return score
 
@@ -57,11 +55,44 @@ class Quiz:
             "hint": self.hint
         }
 
+    
     @classmethod
     def from_dict(cls, data):
+        # 데이터가 딕셔너리인지 확인
+        if not isinstance(data, dict):
+            raise ValueError("퀴즈 데이터 형식이 올바르지 않습니다.")
+
+        # 필수 항목 확인
+        required_keys = ["question", "choices", "answer"]
+
+        for key in required_keys:
+            if key not in data:
+                raise ValueError(f"필수 항목이 없습니다: {key}")
+
+        question = data["question"]
+        choices = data["choices"]
+        answer = data["answer"]
+        hint = data.get("hint", "")
+
+        # 자료형 검사
+        if not isinstance(question, str) or not question.strip():
+            raise ValueError("문제 내용이 올바르지 않습니다.")
+
+        if not isinstance(choices, list) or len(choices) != 4:
+            raise ValueError("선택지는 4개의 리스트여야 합니다.")
+
+        if not all(isinstance(choice, str) and choice.strip() for choice in choices):
+            raise ValueError("선택지 내용이 올바르지 않습니다.")
+
+        if type(answer) is not int or not 1 <= answer <= len(choices):
+            raise ValueError("정답 번호가 올바르지 않습니다.")
+
+        if not isinstance(hint, str):
+            raise ValueError("힌트 형식이 올바르지 않습니다.")
+
         return cls(
-            data["question"],
-            data["choices"],
-            data["answer"],
-            data.get("hint", "")
+            question,
+            choices,
+            answer,
+            hint
         )

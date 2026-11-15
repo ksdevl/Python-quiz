@@ -331,7 +331,7 @@
             "hint": "빛을 파장별로 나누어 분석하면 별의 물리적·화학적 특성을 파악할 수 있습니다."
         }
     ],
-    "best_score": 73,
+    "best_score": 100,
     "history": [
         {
             "played_at": "2026-11-12 15:42:30",
@@ -346,6 +346,13 @@
             "correct_answers": 10,
             "score": 73,
             "hint_count": 2
+        },
+        {
+            "played_at": "2026-11-15 14:37:16",
+            "total_questions": 1,
+            "correct_answers": 1,
+            "score": 100,
+            "hint_count": 0
         }
     ]
 }
