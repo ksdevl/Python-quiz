@@ -65,7 +65,7 @@ Python Quiz는 Python 기초 문법과 객체지향 프로그래밍을 학습하
 | 중급(원리와 현상 이해) | 별의 에너지 생성, 천체의 진화, 우주 팽창 등 과학적 원리를 이해해야 하는 문제 |
 | 고급(심화 이론과 우주론) | 상대성이론, 암흑물질·암흑에너지, 우주의 기원 등 추상적인 개념을 이해해야 하는 문제 |
 
-기본 퀴즈는 카테고리와 난이도에 따라 20개 이상 제공하며, 사용자가 직접 문제를 추가할 수 있도록 구현하였다.
+기본 퀴즈는 카테고리와 난이도에 따라 30개 이상 제공하며, 사용자가 직접 문제를 추가할 수 있도록 구현하였다.
 
 ## 3. 개발 환경
 
@@ -105,19 +105,12 @@ python-quiz-game/
 ├── .gitignore
 └── docs/
     └── screenshots/
-        ├── environment.png
-        ├── menu.png
-        ├── play.png
-        ├── random_quiz.png
-        ├── question_count.png
-        ├── hint.png
-        ├── add_quiz.png
-        ├── delete_quiz.png
-        ├── quiz_list.png
-        ├── score.png
-        ├── history.png
-        ├── restart.png
-        └── git_history.png
+        ├── 개발 환경.png
+        ├── 실행 메뉴.png
+        ├── 퀴즈 목록.png
+        ├── 게임 점수 기록.png
+        ├── ........
+        └── 힌트 사용.png
 ```
 
 ### 4-1. 파일별 역할
@@ -463,16 +456,17 @@ py -m py_compile main.py quiz.py quiz_game.py
 ```
 이상이 없을 경우 아무 메시지도 안뜸
 <br><br>
+
 Json 히스토리 확인
 ```powershell
 Get-Content .\state.json -Encoding UTF8
 ```
-<br>
+
 Git 저장소 상태 확인
 ```powershell
 git status
 ```
-<br>
+
 Git에 저장된 커밋 기록 확인
 ```powershell
 git log --oneline --graph --all
